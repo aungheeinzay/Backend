@@ -9,7 +9,7 @@
 <body>
     <main>
         <h1>create post</h1>
-    <form action="/edit/<%=post._id%>" method="post">
+    <form action="/admin/edit/<%=post._id%>" method="post">
         <input type="text" value="<%=post._id %>" name="postId" hidden>
         <input type="text" name="title" value="<%= post.title %>">
         <input type="text" name="image_url" value="<%= post.image_url%>">

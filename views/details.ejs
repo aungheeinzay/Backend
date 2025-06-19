@@ -10,15 +10,15 @@
     <h1>Details</h1>
     <section>
         <h3><%= post.title %></h3>
-        <img src="https://media.istockphoto.com/id/1272759003/photo/planet-earth-from-the-space-at-night.jpg?s=612x612&w=0&k=20&c=wCHaTyBR_0YT9HHjnUHScH0R8lMk778WXp98-hA-Akw=" alt="photo">
+        <img src="<%= post.image_url%>" alt="photo">
         <p><%= post.description  %></p>
         
     </section>
-    <form action="/detail/delete/<%= post._id %>" method="post">
+    <form action="/admin/delete/<%= post._id %>" method="post">
         <button>delete</button>
     </form>
     <div class="editbtn">
-        <a href="/detail/edit/<%=post._id%>">edit</a>
+        <a href="/admin/edit/<%=post._id%>">edit</a>
     </div>
     <a class="backhome" href="/">back</a>
 </body>

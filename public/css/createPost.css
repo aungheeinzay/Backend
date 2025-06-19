@@ -34,6 +34,7 @@ button{
     color: white;
     background: darkred;
     border: 2px solid darkred;
+    cursor: pointer;
 }
 a{
     position:absolute;
