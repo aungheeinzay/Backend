@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>this is your idea</h1>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus, numquam repellat! Cum perspiciatis minus ab, quod possimus blanditiis laboriosam dolore dicta voluptatum quidem quam amet recusandae laudantium. Dolorem, reprehenderit tempore.</p>
+    <a href="/admin/createPost">add post</a>
+    <hr>
+    </header>
+    
+    <section>
+        <% if(posts.length==0) { %>
+            <p>not post yet</p>
+        <% } %>
+       <% for(p of posts) { %>
+        <div class="card">
+         <h4><%= p.title%><h4>
+        <a href="/detail/<%= p._id%>">seemore...</a>
+       </div>
+       <% } %>
+    </section>
+</body>
+</html>

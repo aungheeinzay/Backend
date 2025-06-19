@@ -1,0 +1,48 @@
+h1{
+    color: darkred;
+}
+h3{
+    padding: 5px;
+    color: darkred;
+    border-bottom: 2px solid darkred;
+}
+img{
+    width: 100%;
+    aspect-ratio: 2/1;
+}
+section{
+    width: 80%;
+    margin: 0 auto;
+}
+.backhome{
+     position:absolute;
+    top:10px;
+    right: 20px;
+    font-size: 1.2rem;
+}
+form{
+    width: 80%;
+    margin-inline: auto;
+}
+button{
+    width: 100%;
+    padding: 5px;
+    cursor: pointer;
+    margin-bottom:5px;
+}
+.editbtn{
+    width: 80%;
+    margin-inline: auto;
+
+}
+.editbtn>a{
+    display: block;
+    background: darkred;
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+}

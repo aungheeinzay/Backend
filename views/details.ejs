@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>details</title>
+    <link rel="stylesheet" href="/css/detail.css">
+</head>
+<body>
+    <h1>Details</h1>
+    <section>
+        <h3><%= post.title %></h3>
+        <img src="https://media.istockphoto.com/id/1272759003/photo/planet-earth-from-the-space-at-night.jpg?s=612x612&w=0&k=20&c=wCHaTyBR_0YT9HHjnUHScH0R8lMk778WXp98-hA-Akw=" alt="photo">
+        <p><%= post.description  %></p>
+        
+    </section>
+    <form action="/detail/delete/<%= post._id %>" method="post">
+        <button>delete</button>
+    </form>
+    <div class="editbtn">
+        <a href="/detail/edit/<%=post._id%>">edit</a>
+    </div>
+    <a class="backhome" href="/">back</a>
+</body>
+</html>

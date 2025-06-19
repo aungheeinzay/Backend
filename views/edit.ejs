@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/createPost.css">
+</head>
+<body>
+    <main>
+        <h1>create post</h1>
+    <form action="/edit/<%=post._id%>" method="post">
+        <input type="text" value="<%=post._id %>" name="postId" hidden>
+        <input type="text" name="title" value="<%= post.title %>">
+        <input type="text" name="image_url" value="<%= post.image_url%>">
+        <textarea name="description" id="" rows="10" placeholder="description"><%= post.description %></textarea>
+        <button>update</button>
+    </form>
+    <a href="/detail/<%=post._id%>">cancel</a>
+    </main>
+</body>
+</html>
