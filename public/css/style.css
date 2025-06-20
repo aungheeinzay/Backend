@@ -39,3 +39,17 @@ section{
     display: flex;
     justify-content: space-between;
 }
+.routeContainer{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+
+}
+button{
+    padding: 5px 15px;
+    background: darkred;
+    border: darkred;
+    border-radius: 5px;
+    color: white;
+    line-height: 20px;
+}

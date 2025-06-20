@@ -10,8 +10,15 @@
     <header>
         <h1>this is your idea</h1>
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus, numquam repellat! Cum perspiciatis minus ab, quod possimus blanditiis laboriosam dolore dicta voluptatum quidem quam amet recusandae laudantium. Dolorem, reprehenderit tempore.</p>
-    <a href="/admin/createPost">add post</a>
+    
     <% if(isLogin) { %>
+   <div class="routeContainer">
+     <a href="/admin/createPost">add post</a>
+   <form action="/logout" method="post">
+    <button>logout</button>
+   </form>
+   </div>
+    <% } else { %>
     <a href="/login">register</a>
     <% } %>
     <hr>
