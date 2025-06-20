@@ -8,7 +8,8 @@ const dotenv = require("dotenv").config()
 
 const postRouter = require("./routers/posts")
 const adminRouter = require("./routers/admin")
-const authRouter = require("./routers/admin")
+const authRouter = require("./routers/auth")
+
 app.set("view engine","ejs")
 app.set("views",'views')
 

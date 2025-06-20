@@ -11,7 +11,9 @@
         <h1>this is your idea</h1>
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus, numquam repellat! Cum perspiciatis minus ab, quod possimus blanditiis laboriosam dolore dicta voluptatum quidem quam amet recusandae laudantium. Dolorem, reprehenderit tempore.</p>
     <a href="/admin/createPost">add post</a>
-    <a href="/login">create a new account</a>
+    <% if(isLogin) { %>
+    <a href="/login">register</a>
+    <% } %>
     <hr>
     </header>
     

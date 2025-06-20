@@ -2,11 +2,14 @@ const Post = require("../models/post")
 const mongoose =require("mongoose")
 
 exports.renderHome=async(req,res)=>{
+const cookies = req.get("Cookie")
+const isLogin = cookies && cookies.split("=")[1].trim() == true || false
+
 Post.find().select("title").populate("userId","username")
 .sort({title:-1}).then((posts)=>{
     console.log(posts);
     
-    res.render("home",{posts})
+    res.render("home",{posts,isLogin})
 }).catch(err=>console.log(err))
 }
 
