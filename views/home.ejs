@@ -11,6 +11,7 @@
         <h1>this is your idea</h1>
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus, numquam repellat! Cum perspiciatis minus ab, quod possimus blanditiis laboriosam dolore dicta voluptatum quidem quam amet recusandae laudantium. Dolorem, reprehenderit tempore.</p>
     <a href="/admin/createPost">add post</a>
+    <a href="/login">create a new account</a>
     <hr>
     </header>
     
@@ -20,8 +21,11 @@
         <% } %>
        <% for(p of posts) { %>
         <div class="card">
-         <h4><%= p.title%><h4>
+        <p><%= p.userId.username %></p>
+        <div>
+        <h4><%= p.title%><h4>
         <a href="/detail/<%= p._id%>">seemore...</a>
+        </div>
        </div>
        <% } %>
     </section>

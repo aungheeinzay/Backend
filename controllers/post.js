@@ -2,7 +2,10 @@ const Post = require("../models/post")
 const mongoose =require("mongoose")
 
 exports.renderHome=async(req,res)=>{
-Post.find().sort({title:-1}).then((posts)=>{
+Post.find().select("title").populate("userId","username")
+.sort({title:-1}).then((posts)=>{
+    console.log(posts);
+    
     res.render("home",{posts})
 }).catch(err=>console.log(err))
 }
@@ -21,8 +24,5 @@ exports.renderDetail=async(req,res)=>{
         console.log(err);
             
         }
-    
 }
-
-
 
