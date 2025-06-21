@@ -1,7 +1,7 @@
 const User = require("../models/user")
 const bcrypt = require("bcrypt")
 exports.renderLogin=(req,res)=>{
-    res.render("auth/login",{csrfToken:req.csrfToken()})
+    res.render("auth/login",{csrfToken:req.csrfToken(),errorMsg:req.flash("error")})
 }
 exports.postLogin=async(req,res)=>{
   const {email,password} = req.body
@@ -18,6 +18,7 @@ exports.postLogin=async(req,res)=>{
             return res.redirect("/")
         }
     }
+    req.flash("error","check your information!")
     return res.redirect('/login')
   }catch(err){
     console.log(err);
@@ -31,7 +32,7 @@ exports.Logout=(req,res)=>{
 }
 
 exports.renderRegister=(req,res)=>{
-    res.render("auth/register",{csrfToken:req.csrfToken()})
+    res.render("auth/register",{csrfToken:req.csrfToken(),errorMsg:req.flash("errorReg")})
 }
 
 exports.register=async(req,res)=>{
@@ -39,6 +40,7 @@ exports.register=async(req,res)=>{
     try{
     const user =await User.findOne({email})
     if(user){
+        req.flash("errorReg","email is already exit")
         return res.redirect("/register")
     }
     await User.create({

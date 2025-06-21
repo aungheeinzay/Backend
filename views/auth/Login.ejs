@@ -10,6 +10,9 @@
     <main>
         <h1>create post</h1>
     <form action="/login" method="post">
+        <% if(errorMsg.length){%>
+            <p class="failMsg"><%=errorMsg %></p>
+        <% } %>
         <input type="text" name="email" placeholder="enter a email">
         <input type="password" name="password" placeholder="enter password">
          <input hidden name="_csrf" value="<%= csrfToken %>">

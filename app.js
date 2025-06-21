@@ -12,7 +12,7 @@ const postRouter = require("./routers/posts")
 const adminRouter = require("./routers/admin")
 const authRouter = require("./routers/auth")
 const{isLogin} =require("./middleware/isLogin")
-
+const flash = require("connect-flash")
 
 app.set("view engine","ejs")
 app.set("views",'views')
@@ -47,7 +47,7 @@ app.use((req,res,next)=>{
         next()
     }).catch(err=>console.log(err))
 })
-
+app.use(flash())
 
 app.use(postRouter)
 app.use("/admin",isLogin,adminRouter)
