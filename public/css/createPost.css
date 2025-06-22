@@ -50,3 +50,11 @@ a{
     width: 100%;
     text-align: center;
 }
+.forget{
+    position: static;
+    align-self: self-start;
+    text-decoration: none;
+}
+.gmailLink{
+    position: static;
+}

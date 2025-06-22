@@ -13,6 +13,7 @@
         <input type="text" name="title" placeholder="enter a title">
         <input type="text" name="image_url" placeholder="enter image url">
         <textarea name="description" id="" rows="10" placeholder="description"></textarea>
+        <input hidden name="_csrf" value="<%= csrfToken %>">
         <button>add post</button>
     </form>
     <a href="/">back</a>

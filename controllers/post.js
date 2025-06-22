@@ -19,7 +19,7 @@ exports.renderDetail=async(req,res)=>{
     //    if(!post){
     //     res.status(404).send("post is not found")
     // //    }
-        res.render("details",{post})}catch(err){
+        res.render("details",{post,csrfToken:req.csrfToken()})}catch(err){
         console.log(err);
             
         }

@@ -8,13 +8,13 @@ exports.createPost=(req,res)=>{
 }
 
 exports.renderCreatePost=(req,res)=>{
-    res.render("createPost")
+    res.render("createPost",{csrfToken:req.csrfToken()})
 }
 
 exports.renderEditPage=(req,res)=>{
     const {postId} =req.params
     Post.findById(postId).then((post)=>{
-        res.render("edit",{post})
+        res.render("edit",{post,csrfToken:req.csrfToken()})
     }).catch((err)=>console.log(err))
 }
 
