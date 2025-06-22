@@ -5,10 +5,7 @@ exports.renderHome=async(req,res)=>{
 const isLogin = req.session.isLogin ? true : false
 Post.find().select("title").populate("userId","username")
 .sort({title:-1}).then((posts)=>{
-    console.log(posts);
-    console.log(isLogin);
-    
-    res.render("home",{posts,isLogin})
+    res.render("home",{posts,isLogin,csrfToken:req.csrfToken()})
 }).catch(err=>console.log(err))
 }
 

@@ -12,6 +12,7 @@
     <form action="/login" method="post">
         <input type="text" name="email" placeholder="enter a email">
         <input type="password" name="password" placeholder="enter password">
+         <input hidden name="_csrf" value="<%= csrfToken %>">
         <button>Login</button>
     </form>
     <a href="/">back</a>
