@@ -14,6 +14,7 @@
         <input type="text" name="title" value="<%= post.title %>">
         <input type="text" name="image_url" value="<%= post.image_url%>">
         <textarea name="description" id="" rows="10" placeholder="description"><%= post.description %></textarea>
+         <input hidden name="_csrf" value="<%= csrfToken %>">
         <button>update</button>
     </form>
     <a href="/detail/<%=post._id%>">cancel</a>

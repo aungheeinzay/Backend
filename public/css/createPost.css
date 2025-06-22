@@ -42,3 +42,19 @@ a{
     right: 20px;
     font-size: 1.2rem;
 }
+
+.failMsg{
+    background-color: rgb(183, 2, 2);
+    color: white;
+    padding-block: 5px;
+    width: 100%;
+    text-align: center;
+}
+.forget{
+    position: static;
+    align-self: self-start;
+    text-decoration: none;
+}
+.gmailLink{
+    position: static;
+}

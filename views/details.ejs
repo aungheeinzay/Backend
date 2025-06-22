@@ -15,6 +15,7 @@
         
     </section>
     <form action="/admin/delete/<%= post._id %>" method="post">
+        <input hidden name="_csrf" value="<%= csrfToken %>">
         <button>delete</button>
     </form>
     <div class="editbtn">

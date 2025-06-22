@@ -8,17 +8,16 @@
 </head>
 <body>
     <main>
-        <h1>Register</h1>
-    <form action="/register" method="post">
-          <% if(errorMsg.length){%>
+        <h1>Reset password</h1>
+    <form action="/reset_password" method="post">
+        <% if(errorMsg.length){%>
             <p class="failMsg"><%=errorMsg %></p>
         <% } %>
-        <input type="text" name="username" placeholder="enter a username">
         <input type="text" name="email" placeholder="enter a email">
-        <input type="password" name="password" placeholder="enter password">
-        <input hidden name="_csrf" value="<%= csrfToken %>">
-        <button>Register</button>
+         <input hidden name="_csrf" value="<%= csrfToken %>">
+        <button>Reset</button>
     </form>
+    
     <a href="/">back</a>
     </main>
 </body>
