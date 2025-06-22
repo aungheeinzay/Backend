@@ -52,6 +52,12 @@ app.use(flash())
 app.use(postRouter)
 app.use("/admin",isLogin,adminRouter)
 app.use(authRouter)
+
+app.all("/{*any}",(req,res,next)=>{
+    res.status(404).render("error/fourofour")
+    
+})//need to place this app.all() at the end of all global middleware
+//if not it block all middle ware
 mongoose.connect(process.env.MONGODB_URL).then((_)=>{
 app.listen(3000)
 console.log("connected to mongoose")

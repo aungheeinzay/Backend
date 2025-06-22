@@ -19,7 +19,10 @@ const postSchema = new Schema({
         type:Schema.Types.ObjectId,
         ref:"user",
         required:true
-    }
+    },
+   
+},{
+    timestamps:true
 })
 
 module.exports = model("post",postSchema)

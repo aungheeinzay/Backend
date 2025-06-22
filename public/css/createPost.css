@@ -58,3 +58,10 @@ a{
 .gmailLink{
     position: static;
 }
+p{
+    background: darkred;
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding-block: 5px;
+}

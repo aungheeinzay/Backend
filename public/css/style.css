@@ -23,8 +23,8 @@ a{
 section{
     width: 80%;
     margin:10px  auto 0 auto;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
     gap:10px;
 
 }
@@ -54,4 +54,11 @@ button{
     color: white;
     line-height: 20px;
     
+}
+.userName{
+    grid-column: 1/-1;
+}
+.fourContainer{
+    display: grid;
+    place-items: center;
 }

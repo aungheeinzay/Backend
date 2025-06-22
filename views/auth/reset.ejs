@@ -10,10 +10,10 @@
     <main>
         <h1>Reset password</h1>
     <form action="/reset_password" method="post">
-        <% if(errorMsg.length){%>
+        <% if(errorMsg){%>
             <p class="failMsg"><%=errorMsg %></p>
         <% } %>
-        <input type="text" name="email" placeholder="enter a email">
+        <input type="email" name="email" placeholder="enter a email" value="<%= email %>">
          <input hidden name="_csrf" value="<%= csrfToken %>">
         <button>Reset</button>
     </form>

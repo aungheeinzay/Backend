@@ -13,9 +13,9 @@
           <% if(errorMsg.length){%>
             <p class="failMsg"><%=errorMsg %></p>
         <% } %>
-        <input type="text" name="username" placeholder="enter a username">
-        <input type="text" name="email" placeholder="enter a email">
-        <input type="password" name="password" placeholder="enter password">
+        <input type="text" name="username" placeholder="enter a username" value="<%=failFormData.username %>" required>
+        <input type="text" name="email" placeholder="enter a email" value="<%=failFormData.email %>" required>
+        <input type="password" name="password" placeholder="enter password" value="<%=failFormData.password %>" required>
         <input hidden name="_csrf" value="<%= csrfToken %>">
         <button>Register</button>
     </form>

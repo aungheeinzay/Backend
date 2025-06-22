@@ -9,12 +9,14 @@
 <body>
     <h1>Details</h1>
     <section>
+        <p class="tmp">upload at : <%= time %></p>
         <h3><%= post.title %></h3>
         <img src="<%= post.image_url%>" alt="photo">
         <p><%= post.description  %></p>
         
     </section>
     <% if(isCurrentUser) { %>
+        
         <form action="/admin/delete/<%= post._id %>" method="post">
         <input hidden name="_csrf" value="<%= csrfToken %>">
         <button>delete</button>

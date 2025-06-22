@@ -13,8 +13,8 @@
         <% if(errorMsg.length){%>
             <p class="failMsg"><%=errorMsg %></p>
         <% } %>
-        <input type="text" name="email" placeholder="enter a email">
-        <input type="password" name="password" placeholder="enter password">
+        <input type="text" name="email" placeholder="enter a email" value="<%=failFormData.email%>">
+        <input type="password" name="password" placeholder="enter password" value="<%=failFormData.password%>">
          <input hidden name="_csrf" value="<%= csrfToken %>">
          <a class="forget" href="/reset_password">forget password?</a>
         <button>Login</button>

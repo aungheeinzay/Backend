@@ -1,10 +1,10 @@
 const Post = require("../models/post")
 const mongoose =require("mongoose")
-
+const { formatISO9075 } = require("date-fns");
 exports.renderHome=async(req,res)=>{
 const isLogin = req.session.isLogin ? true : false
-Post.find().select("title").populate("userId","username")
-.sort({title:-1}).then((posts)=>{
+Post.find().select("title createdAt").populate("userId","username")
+.sort({createdAt:-1}).then((posts)=>{
 
     res.render("home",{posts,isLogin,csrfToken:req.csrfToken(),account:req.user?.email})
 }).catch(err=>console.log(err))
@@ -21,7 +21,11 @@ exports.renderDetail=async(req,res)=>{
     //     res.status(404).send("post is not found")
     // //    }
         const isCurrentUser = (post.userId.toString()==req.user?._id) ? true : false
-        res.render("details",{post,csrfToken:req.csrfToken(),isCurrentUser})}catch(err){
+        res.render("details",{
+            post,
+            csrfToken:req.csrfToken(),
+            isCurrentUser,
+            time:formatISO9075(post.createdAt,{representation:'time'})})}catch(err){
         console.log(err);
             
         }

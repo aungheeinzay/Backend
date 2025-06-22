@@ -8,12 +8,15 @@
 </head>
 <body>
     <main>
-        <h1>create post</h1>
+        <h1>Update post</h1>
     <form action="/admin/edit/<%=post._id%>" method="post">
-        <input type="text" value="<%=post._id %>" name="postId" hidden>
-        <input type="text" name="title" value="<%= post.title %>">
-        <input type="text" name="image_url" value="<%= post.image_url%>">
-        <textarea name="description" id="" rows="10" placeholder="description"><%= post.description %></textarea>
+         <% if(errorMsg) { %>
+            <p><%= errorMsg %></p>
+        <% } %>
+        <input type="text" value="<%=post._id %>" name="postId"  hidden>
+        <input type="text" name="title" value="<%=errorMsg ? failForm.title : post.title  %>" >
+        <input type="text" name="image_url" value="<%=errorMsg ? failForm.image_url : post.image_url%>">
+        <textarea name="description" id="" rows="10" placeholder="description"><%=errorMsg ? failForm.description : post.description %></textarea>
          <input hidden name="_csrf" value="<%= csrfToken %>">
         <button>update</button>
     </form>

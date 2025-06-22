@@ -3,8 +3,7 @@ const nodemaler = require("nodemailer")
 const bcrypt = require("bcrypt")
 const dotenv = require("dotenv").config()
 const crypto = require("crypto")
-const { fail } = require("assert")
-const { error } = require("console")
+const {validationResult} = require("express-validator")
 
 const transporter = nodemaler.createTransport({
     service:"gmail",
@@ -15,7 +14,14 @@ const transporter = nodemaler.createTransport({
 })
 
 exports.renderLogin=(req,res)=>{
-    res.render("auth/login",{csrfToken:req.csrfToken(),errorMsg:req.flash("error")})
+    res.render("auth/login",{
+        csrfToken:req.csrfToken(),
+        errorMsg:req.flash("error"),
+        failFormData:{
+            email:"",
+            password:""
+        }
+    })
 }
 exports.postLogin=async(req,res)=>{
   const {email,password} = req.body
@@ -32,8 +38,15 @@ exports.postLogin=async(req,res)=>{
             return res.redirect("/")
         }
     }
-    req.flash("error","check your information!")
-    return res.redirect('/login')
+    req.flash("error","wrong email or password!")
+    return res.status(422).render('auth/login',{
+        failFormData:{
+            email,
+            password
+        },
+        csrfToken:req.csrfToken(),
+        errorMsg:req.flash("error")
+    })
   }catch(err){
     console.log(err);
     
@@ -46,17 +59,32 @@ exports.Logout=(req,res)=>{
 }
 
 exports.renderRegister=(req,res)=>{
-    res.render("auth/register",{csrfToken:req.csrfToken(),errorMsg:req.flash("errorReg")})
+    res.render("auth/register",{
+        csrfToken:req.csrfToken(),
+        errorMsg:req.flash("errorReg"),
+        failFormData:{
+            username:"",
+            email:"",
+            password:""
+        }})
 }
 
 exports.register=async(req,res)=>{
     const {username,email,password} = req.body
-    try{
-    const user =await User.findOne({email})
-    if(user){
-        req.flash("errorReg","email is already exit")
-        return res.redirect("/register")
+    const errors = validationResult(req)
+    if(!errors.isEmpty()){
+        console.log(errors);
+        return res.status(422)
+        .render("auth/register",{
+            csrfToken:req.csrfToken(),
+            errorMsg:errors.array()[0].msg,
+            failFormData:{
+                username,
+                email,
+                password
+        }})//422 is used when validation fail
     }
+    try{
     await User.create({
         username,
         email,
@@ -76,7 +104,10 @@ exports.register=async(req,res)=>{
 }
 
 exports.renderReset=(req,res)=>{
-    res.render("auth/reset",{csrfToken:req.csrfToken(),errorMsg:req.flash("nomail")})
+    res.render("auth/reset",{
+        csrfToken:req.csrfToken(),
+        errorMsg:null,
+        email:""})
 }
 exports.feedBack=(req,res)=>{
     res.render("auth/feedback")
@@ -84,6 +115,14 @@ exports.feedBack=(req,res)=>{
 
 exports.resetLink=async(req,res)=>{
     const {email} = req.body
+    const error  = validationResult(req)
+    if(!error.isEmpty()){
+        return res.status(422).render("auth/reset",{
+            csrfToken:req.csrfToken(),
+            email,
+            errorMsg:error.array()[0].msg
+        })
+    }
   try{
     crypto.randomBytes(30,async(err,buffer)=>{
         if(err){
@@ -92,10 +131,6 @@ exports.resetLink=async(req,res)=>{
         }
         const token = buffer.toString("hex")
         const user = await User.findOne({email})
-        if(!user){
-            req.flash("nomail","no email exit")
-            return res.redirect("/reset_password")
-        }
         user.resetToken=token;
         user.tokenExpiration=Date.now()+(1000*60*60)
         await user.save()
@@ -116,24 +151,40 @@ exports.resetLink=async(req,res)=>{
 
 exports.getResetForm=(req,res)=>{
     const {token} = req.params
-    res.render("auth/resetForm",{errorMsg:req.flash("noMatch"),csrfToken:req.csrfToken(),token})
+    res.render("auth/resetForm",{
+        errorMsg:null,
+        token,
+        csrfToken:req.csrfToken(),
+        failFormData:{
+                    newPassword:"",
+                    conformPassword:""
+                },
+            })
 
 }
 
 exports.resetForm=async(req,res)=>{
     const {token} =req.params
     const{newPassword,conformPassword} = req.body
+    const errors = validationResult(req)
+    if(!errors.isEmpty()){
+        return res.status(422).render("auth/resetForm",{
+            failFormData:{
+                newPassword,
+                conformPassword
+            },
+            token,
+            errorMsg:errors.array()[0].msg,
+            csrfToken:req.csrfToken()
+        })
+    }
     try{
-        if(newPassword === conformPassword){
             const user = await User.findOne({resetToken:token,tokenExpiration:{$gt:Date.now()}})
             user.password = await bcrypt.hash(newPassword,10),
             user.resetToken=null,
             user.tokenExpiration=null,
             await user.save()
             res.redirect("/login")
-        }
-        req.flash("noMatch","passwords must be same")
-        return res.redirect(`/reset_password/${token}`)
     }catch(err){
         console.log(err);
     }

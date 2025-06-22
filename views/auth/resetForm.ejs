@@ -11,11 +11,11 @@
     <main>
         <h1>Reset password</h1>
     <form action="/reset_password/<%=token%>" method="post">
-        <% if(errorMsg.length){%>
+        <% if(errorMsg){%>
             <p class="failMsg"><%=errorMsg %></p>
         <% } %>
-        <input type="password" name="newPassword" placeholder="new password">
-        <input type="password" name="conformPassword" placeholder="conform password">
+        <input type="password" name="newPassword" placeholder="new password" value="<%= failFormData.newPassword%>" required>
+        <input type="password" name="conformPassword" placeholder="conform password" value="<%=failFormData.conformPassword%>" required>
          <input hidden name="_csrf" value="<%= csrfToken %>">
         <button>update password</button>
     </form>
