@@ -14,13 +14,15 @@
         <p><%= post.description  %></p>
         
     </section>
-    <form action="/admin/delete/<%= post._id %>" method="post">
+    <% if(isCurrentUser) { %>
+        <form action="/admin/delete/<%= post._id %>" method="post">
         <input hidden name="_csrf" value="<%= csrfToken %>">
         <button>delete</button>
     </form>
     <div class="editbtn">
         <a href="/admin/edit/<%=post._id%>">edit</a>
     </div>
+    <% } %>
     <a class="backhome" href="/">back</a>
 </body>
 </html>

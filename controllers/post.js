@@ -5,7 +5,8 @@ exports.renderHome=async(req,res)=>{
 const isLogin = req.session.isLogin ? true : false
 Post.find().select("title").populate("userId","username")
 .sort({title:-1}).then((posts)=>{
-    res.render("home",{posts,isLogin,csrfToken:req.csrfToken()})
+
+    res.render("home",{posts,isLogin,csrfToken:req.csrfToken(),account:req.user?.email})
 }).catch(err=>console.log(err))
 }
 
@@ -19,7 +20,8 @@ exports.renderDetail=async(req,res)=>{
     //    if(!post){
     //     res.status(404).send("post is not found")
     // //    }
-        res.render("details",{post,csrfToken:req.csrfToken()})}catch(err){
+        const isCurrentUser = (post.userId.toString()==req.user?._id) ? true : false
+        res.render("details",{post,csrfToken:req.csrfToken(),isCurrentUser})}catch(err){
         console.log(err);
             
         }

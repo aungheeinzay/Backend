@@ -21,20 +21,24 @@ exports.renderEditPage=(req,res)=>{
 exports.updatePost=(req,res)=>{
     const {postId,title,description,image_url} = req.body
     Post.findById(postId).then((post)=>{
+        if(post.userId.toString() !== req.user._id){
+            return res.redirect(`/detail/${postId}`)
+        }
         post.title=title
         post.image_url=image_url
         post.description=description
         return post.save()
-    }).then((result)=>{
+        .then((result)=>{
         console.log("updated");
         res.redirect(`/detail/${postId}`)
+    })
     }).catch(err=>console.log(err))
 }
 
 exports.deletePost=(req,res)=>{
     const {postId} = req.params
     
-    Post.findByIdAndDelete(postId).then((_)=>{
+    Post.deleteOne({_id:postId,userId:req.user._id}).then((_)=>{
         console.log("deleted");
         res.redirect("/")
     }).catch(err=>console.log(err))
