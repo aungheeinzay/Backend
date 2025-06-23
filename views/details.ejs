@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>details</title>
     <link rel="stylesheet" href="/css/detail.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
     <h1>Details</h1>
     <section>
-        <p class="tmp">upload at : <%= time %></p>
+        <p class="tmp"><i class="fa-sharp fa-solid fa-clock"></i> : <%= time.split(":")[0] + ":" + time.split(":")[1] %> mins</p>
         <h3><%= post.title %></h3>
         <img src="<%= post.image_url%>" alt="photo">
         <p><%= post.description  %></p>
@@ -25,6 +26,6 @@
         <a href="/admin/edit/<%=post._id%>">edit</a>
     </div>
     <% } %>
-    <a class="backhome" href="/">back</a>
+    <a class="backhome" href="/"><i class="fa-solid fa-circle-left"></i>back</a>
 </body>
 </html>

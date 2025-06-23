@@ -10,7 +10,7 @@ Post.find().select("title createdAt").populate("userId","username")
 }).catch(err=>console.log(err))
 }
 
-exports.renderDetail=async(req,res)=>{
+exports.renderDetail=async(req,res,next)=>{
     try{
         const {postId} =req.params;
     // if(!mongoose.Types.ObjectId.isValid(postId)){
@@ -25,9 +25,11 @@ exports.renderDetail=async(req,res)=>{
             post,
             csrfToken:req.csrfToken(),
             isCurrentUser,
-            time:formatISO9075(post.createdAt,{representation:'time'})})}catch(err){
+            time:formatISO9075(post.createdAt,{representation:'time'})})
+        }catch(err){
         console.log(err);
-            
+        const error = new Error("Post not found")
+        return next(error)
         }
 }
 

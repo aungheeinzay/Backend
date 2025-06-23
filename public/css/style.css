@@ -57,8 +57,14 @@ button{
 }
 .userName{
     grid-column: 1/-1;
+    display: grid;
+    place-items: center;
 }
 .fourContainer{
     display: grid;
     place-items: center;
+}
+.fa-circle-user{
+    font-size: 2rem;
+    color: darkred;
 }

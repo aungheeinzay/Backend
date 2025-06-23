@@ -53,6 +53,9 @@ app.use(postRouter)
 app.use("/admin",isLogin,adminRouter)
 app.use(authRouter)
 
+app.use((err,req,res,next)=>{
+    res.status(500).render("error/500",{err})
+})
 app.all("/{*any}",(req,res,next)=>{
     res.status(404).render("error/fourofour")
     
