@@ -9,13 +9,13 @@
 <body>
     <main>
         <h1>Update post</h1>
-    <form action="/admin/edit/<%=post._id%>" method="post">
+    <form action="/admin/edit/<%=post._id%>" method="post" enctype="multipart/form-data">
          <% if(errorMsg) { %>
             <p><%= errorMsg %></p>
         <% } %>
         <input type="text" value="<%=post._id %>" name="postId"  hidden>
         <input type="text" name="title" value="<%=errorMsg ? failForm.title : post.title  %>" >
-        <input type="text" name="image_url" value="<%=errorMsg ? failForm.image_url : post.image_url%>">
+        <input type="file" name="image_url">
         <textarea name="description" id="" rows="10" placeholder="description"><%=errorMsg ? failForm.description : post.description %></textarea>
          <input hidden name="_csrf" value="<%= csrfToken %>">
         <button>update</button>

@@ -1,7 +1,19 @@
 const Post = require("../models/post")
 const {validationResult} = require("express-validator")
+
 exports.createPost=(req,res)=>{
      const {title,image_url,description} = req.body
+     if(req.file===undefined){
+           return res.status(422).render("createPost",{
+            csrfToken:req.csrfToken(),
+            errorMsg:"it must be jpg/jpeg/png",
+            failForm:{
+                title,
+                description,
+                image_url
+            }
+        })
+     }
     const error = validationResult(req)
     if(!error.isEmpty()){
         return res.status(422).render("createPost",{
@@ -13,8 +25,12 @@ exports.createPost=(req,res)=>{
                 image_url
             }
         })
-    }
-    Post.create({title,description,image_url,userId:req.session.userInfo._id}).then((_)=>{
+    } 
+    Post.create({
+        title,
+        description,
+        image_url:req.file.path,
+        userId:req.session.userInfo._id}).then((_)=>{
         res.redirect("/")
     }).catch(err=>console.log(err))
 }
@@ -42,7 +58,7 @@ exports.renderEditPage=(req,res)=>{
 }
 
 exports.updatePost=(req,res)=>{
-    const {postId,title,description,image_url} = req.body
+    const {postId,title,description} = req.body
     const error = validationResult(req)
     Post.findById(postId).then((post)=>{
         if(post.userId.toString() !== req.user._id.toString()){
@@ -55,17 +71,26 @@ exports.updatePost=(req,res)=>{
                 post,
                 failForm:{
                     title,
-                    image_url,
                     description
                 }
             })
         }
+        if( req.file?.mimetype =='image/jpeg' ||
+            req.file?.mimetype =='image/jpg' ||
+            req.file?.mimetype =='image/png'
+          ){
         post.title=title
-        post.image_url=image_url
+        post.image_url=req.file.path
         post.description=description
         return post.save()
-        .then((result)=>{
+        .then((_)=>{
         console.log("updated");
+        res.redirect(`/detail/${postId}`)
+    })
+    }
+    post.title = title,
+    post.description=description
+    return post.save().then((_)=>{
         res.redirect(`/detail/${postId}`)
     })
     }).catch(err=>console.log(err))

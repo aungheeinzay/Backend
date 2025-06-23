@@ -12,7 +12,7 @@
     <section>
         <p class="tmp"><i class="fa-sharp fa-solid fa-clock"></i> : <%= time.split(":")[0] + ":" + time.split(":")[1] %> mins</p>
         <h3><%= post.title %></h3>
-        <img src="<%= post.image_url%>" alt="photo">
+        <img src="<%= '/' + post.image_url%>" alt="photo">
         <p><%= post.description  %></p>
         
     </section>

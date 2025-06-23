@@ -8,6 +8,7 @@ const session = require("express-session")
 const mongoStore = require("connect-mongodb-session")(session)
 const User = require("./models/user")
 const dotenv = require("dotenv").config()
+const multer = require("multer")
 const postRouter = require("./routers/posts")
 const adminRouter = require("./routers/admin")
 const authRouter = require("./routers/auth")
@@ -17,9 +18,33 @@ const flash = require("connect-flash")
 app.set("view engine","ejs")
 app.set("views",'views')
 
+
 app.use(express.static(path.join(__dirname,"public")))
+app.use("/uploads",express.static(path.join(__dirname,"uploads")))
 app.use(bodyParser.urlencoded({extended:false}))
 
+
+const storageConfigure = multer.diskStorage({
+    destination:function(req,file,cb){
+        cb(null,"uploads")
+    },
+    filename:(req,file,cb)=>{
+        const unique = Date.now()+"-"+Math.round(Math.random()*1E9)+"blog.io_"
+        cb(null,unique+"."+file.originalname.split(".")[1])
+    }
+})
+const fileFilter = (req,file,cb)=>{
+    if(
+        file.mimetype==='image/jpeg' ||
+        file.mimetype==='image/jpg'  ||
+        file.mimetype==='image/png'
+    ){
+        cb(null,true)
+    }else{
+        cb(null,false)
+    }
+}
+app.use(multer({storage:storageConfigure,fileFilter}).single("image_url"))
 const store  = new mongoStore({
     uri:process.env.MONGODB_URI,
     collection:"session"

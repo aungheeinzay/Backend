@@ -24,7 +24,7 @@ section{
     width: 80%;
     margin:10px  auto 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
     gap:10px;
 
 }
@@ -67,4 +67,10 @@ button{
 .fa-circle-user{
     font-size: 2rem;
     color: darkred;
+}
+@media (max-width:768px) {
+    section{
+        gap:5px;
+         grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    }
 }
