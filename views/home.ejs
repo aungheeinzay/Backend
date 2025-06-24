@@ -1,44 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-</head>
-<body>
-    <header>
-        <h1>this is your idea</h1>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus, numquam repellat! Cum perspiciatis minus ab, quod possimus blanditiis laboriosam dolore dicta voluptatum quidem quam amet recusandae laudantium. Dolorem, reprehenderit tempore.</p>
-    
-    <% if(isLogin) { %>
-   <div class="routeContainer">
-     <a href="/admin/createPost">add post</a>
-   <form action="/logout" method="post">
-    <input hidden value="<%=csrfToken%>" name="_csrf">
-    <button>logout</button>
-   </form>
-   </div>
-    <% } else { %>
-    <a href="/login">login</a>
-    <a href="/register">register</a>
-    <% } %>
-    <hr>
-    </header>
-    
-    <section>
+
+    <%- include("./includes/header") %>
+    <section class="homesection">
        <p class="userName"><i class="fa-duotone fa-solid fa-circle-user"></i><span ><%= account ? account : "no account"%></span></p>
         <% if(posts.length==0) { %>
             <p>not post yet</p>
         <% } %>
        <% for(p of posts) { %>
         <div class="card">
-        <p><%= p.userId.username %></p>
-        <div>
-        <h4><%= p.title%><h4>
-        <a href="/detail/<%= p._id%>">seemore...</a>
-        </div>
+        <p class="card-username"><%= p.userId.username %></p>
+        <img src="<%= p.image_url %>" alt="photo">
+        <p class="homeTitle"><%= p.title %></p>
+        <p class="homeDes"><%= p.description.substr(0,60) %><a href="/detail/<%= p._id%>"> seemore...</a></p>
        </div>
        <% } %>
     </section>

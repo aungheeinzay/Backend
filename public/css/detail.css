@@ -1,12 +1,15 @@
-h1{
+.detailh1{
     color: darkred;
+}
+.savebtn{
+    text-decoration: none;
 }
 h3{
     padding: 5px;
     color: darkred;
     border-bottom: 2px solid darkred;
 }
-img{
+.imageDetail{
     width: 100%;
     aspect-ratio: 2/1;
 }
@@ -20,11 +23,11 @@ section{
     right: 20px;
     font-size: 1.2rem;
 }
-form{
+.deleteForm{
     width: 60%;
     margin-inline: auto;
 }
-button{
+.deletePost{
     width: 100%;
     padding: 5px;
     cursor: pointer;
@@ -58,7 +61,7 @@ button{
     section{
         width: 80%;
     }
-    .editbtn,form{
+    .editbtn,.deleteForm{
         width: 80%;
     }
 }

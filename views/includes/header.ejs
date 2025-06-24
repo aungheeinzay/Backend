@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favIcon.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" >
+</head>
+<body>
+    <header>
+        <div class="routeContainer">
+            <a href="/" class="homeLink">CIF.io</a>
+            <img src="/images/favIcon.png" alt="">
+        </div>
+   <div class="routeContainer">
+    <% if(isLogin) { %>
+   <a class="headera" href="/admin/createPost">post</a>
+   <form action="/logout" method="post">
+    <input hidden value="<%=csrfToken%>" name="_csrf">
+    <button>logout</button>
+   </form>
+     <% } else { %>
+    <a class="headera" href="/login">login</a>
+    <a class="headera" href="/register">register</a>
+    <% } %>
+   </div>
+  
+    </header>
+    

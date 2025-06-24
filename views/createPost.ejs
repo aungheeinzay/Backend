@@ -1,25 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/createPost.css">
-</head>
-<body>
-    <main>
-        <h1>create post</h1>
+    <%- include("./includes/header") %>
+    <main class="createMain">
+        
     <form action="/admin/createPost" method="post" enctype="multipart/form-data">
         <% if(errorMsg) { %>
             <p><%= errorMsg %></p>
         <% } %>
         <input type="text" name="title" placeholder="enter a title" value="<%= failForm.title %>" required>
         <input type="file" name = "image_url" id="file"/>
+        <label for="file"><span>+</span><span>upload photo</span></label>
         <textarea name="description" id="" rows="10" placeholder="description"  required><%= failForm.description %></textarea>
         <input hidden name="_csrf" value="<%= csrfToken %>">
         <button>add post</button>
     </form>
-    <a href="/">back</a>
     </main>
 </body>
 </html>

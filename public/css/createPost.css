@@ -65,3 +65,24 @@ p{
     text-align: center;
     padding-block: 5px;
 }
+input[type="file"]{
+    display: none;
+}
+label{
+    border: 2px dashed darkred;
+    width: 100%;
+    padding-block: 5px;
+    border-radius: 5px;
+    display: grid;
+    place-items: center;
+}
+label span{
+    font-size: 1.5rem;
+    color: darkred;
+    
+}
+@media(max-width:768px){
+    .registerMain{
+        width: 90%;
+    }
+}

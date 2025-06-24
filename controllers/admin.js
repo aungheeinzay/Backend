@@ -1,12 +1,15 @@
 const Post = require("../models/post")
+const {fileDelete} =require("../utils/fileDelete")
 const {validationResult} = require("express-validator")
 
 exports.createPost=(req,res)=>{
      const {title,image_url,description} = req.body
+     const isLogin = req.session.isLogin ? true : false
      if(req.file===undefined){
            return res.status(422).render("createPost",{
             csrfToken:req.csrfToken(),
             errorMsg:"it must be jpg/jpeg/png",
+            isLogin,
             failForm:{
                 title,
                 description,
@@ -18,6 +21,7 @@ exports.createPost=(req,res)=>{
     if(!error.isEmpty()){
         return res.status(422).render("createPost",{
             csrfToken:req.csrfToken(),
+            isLogin,
             errorMsg:error.array()[0].msg,
             failForm:{
                 title,
@@ -36,9 +40,11 @@ exports.createPost=(req,res)=>{
 }
 
 exports.renderCreatePost=(req,res)=>{
+    const isLogin = req.session.isLogin ? true : false
     res.render("createPost",{
          csrfToken:req.csrfToken(),
          errorMsg:null,
+         isLogin,
          failForm:{
                 title:"",
                 description:"",
@@ -79,6 +85,7 @@ exports.updatePost=(req,res)=>{
             req.file?.mimetype =='image/jpg' ||
             req.file?.mimetype =='image/png'
           ){
+        fileDelete(post.image_url);
         post.title=title
         post.image_url=req.file.path
         post.description=description
@@ -98,10 +105,16 @@ exports.updatePost=(req,res)=>{
 
 exports.deletePost=(req,res)=>{
     const {postId} = req.params
-    
-    Post.deleteOne({_id:postId,userId:req.user._id}).then((_)=>{
+    Post.findById(postId).then((post)=>{
+        if(!post){
+            res.redirect(`detail/${postId}`)
+        }
+    fileDelete(post.image_url)
+    return Post.deleteOne({_id:postId,userId:req.user._id})
+    }).then((_)=>{
         console.log("deleted");
         res.redirect("/")
     }).catch(err=>console.log(err))
+   
 
 }

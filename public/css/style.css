@@ -1,17 +1,61 @@
-h1{
+*{
+    margin:  0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.homeLink{
     text-align: center;
-    color: darkred;
+    color: white;
+    font-size: 2em;
+    text-decoration: none;
 }
 
-p{
+.card-username{
     opacity: .9;
 }
 
 header{
     width:80%;
     margin-inline: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: darkred;
+    line-height: 25px;
+    padding-block: 5px;
 }
-a{
+header>div>img{
+    width: 30px;
+    height: 30px;
+    padding:2px;
+    border-radius: 50%;
+    background-color: white;
+}
+.routeContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 15px;
+    padding-block: 4px;
+}
+.routeContainer:first-child{
+    margin-left: 10px;
+}
+.routeContainer:last-child{
+    margin-right:10px ;
+}
+.routeContainer form button{
+    background-color: transparent;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    opacity: .8;
+    cursor: pointer;
+}
+/* a{
     text-decoration: none;
     padding: 5px 10px;
     border: 2px solid darkred;
@@ -19,8 +63,21 @@ a{
     color: white;
     border-radius: 5px;
     text-align: center;
+} */
+ .headera{
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+    opacity: .8;
+ }
+.headera:hover,
+.routeContainer form button:hover {
+    opacity: 1;
+    transition: all 0.2s ease;
 }
-section{
+.homesection{
     width: 80%;
     margin:10px  auto 0 auto;
     display: grid;
@@ -34,18 +91,27 @@ section{
     padding: 5px;
     display: flex;
     flex-direction: column;
+
 }
 .card div{
     display: flex;
     justify-content: space-between;
 }
-.routeContainer{
-    display: flex;
-    flex-direction: row;
-    gap:10px;
-
+.card-username{
+    font-weight: bold;
 }
-button{
+.homeTitle{
+    font-weight: 500;
+    padding-block: 5px;
+    border-bottom: 1px solid darkred;
+}
+.homeDes{
+    opacity: .7;
+}
+.homeDes a{
+    text-decoration: none;
+}
+/* button{
    
     padding: 5px 15px;
     background: darkred;
@@ -54,7 +120,7 @@ button{
     color: white;
     line-height: 20px;
     
-}
+} */
 .userName{
     grid-column: 1/-1;
     display: grid;
@@ -68,9 +134,195 @@ button{
     font-size: 2rem;
     color: darkred;
 }
-@media (max-width:768px) {
+
+
+
+/*create post*/
+.createMain{
+    height: 100vh;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-inline: auto;
+}
+.postCreate{
+    color: darkred;
+}
+
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:10px
+}
+input,textarea{
+    padding-block: 5px;
+    width: 100%;
+    font-size: 1rem;
+    border: 2px solid darkred;
+    border-radius: 5px;
+}
+button{
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+    font-size: 1rem;
+    border-radius: 5px;
+    color: white;
+    background: darkred;
+    border: 2px solid darkred;
+    cursor: pointer;
+}
+.tohome{
+    position:absolute;
+    top:10px;
+    right: 20px;
+    font-size: 1.2rem;
+}
+
+.failMsg{
+    background-color: rgb(183, 2, 2);
+    color: white;
+    padding-block: 5px;
+    width: 100%;
+    text-align: center;
+}
+.forget{
+    position: static;
+    align-self: self-start;
+    text-decoration: none;
+}
+.gmailLink{
+    position: static;
+}
+/* p{
+    background: darkred;
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding-block: 5px;
+} */
+input[type="file"]{
+    display: none;
+}
+label{
+    border: 2px dashed darkred;
+    width: 100%;
+    padding-block: 5px;
+    border-radius: 5px;
+    display: grid;
+    place-items: center;
+}
+label span{
+    font-size: 1.5rem;
+    color: darkred;
+    
+}
+
+/*details*/
+.detailh1{
+    color: darkred;
+    font-size: 1.2rem;
+}
+.savebtn{
+    text-decoration: none;
+}
+h3{
+    padding: 5px;
+    color: darkred;
+    border-bottom: 2px solid darkred;
+}
+.imageDetail{
+    width: 100%;
+    aspect-ratio: 2/1;
+}
+.detailsection{
+    width: 80%;
+    margin:10px auto;
+    display: grid;
+    gap: 5px;
+}
+.backhome{
+     position:absolute;
+    top:10px;
+    right: 20px;
+    font-size: 1.2rem;
+}
+.deleteForm{
+    width: 100%;
+    margin-inline: auto;
+}
+.deletePost{
+    width: 100%;
+    padding: 5px;
+    cursor: pointer;
+    margin-bottom:5px;
+    font-size: 1rem;
+}
+.editbtn{
+    display: block;
+    width: 100%;
+    margin-inline: auto;
+    background: darkred;
+    text-align: center;
+    padding-block: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-size:1.1rem;
+}
+.editbtn>a{
+    display: block;
+    background: darkred;
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+}
+.tmp{
+    padding-block:5px ;
+    opacity: .7;
+    font-size: 1.2rem;
+}
+.fa-clock{
+    color: darkred;
+}
+.fa-circle-user{
+    font-size: 1.2rem;
+}
+/* @media(max-width:768px) {
     section{
-        gap:5px;
+        width: 80%;
+    }
+    .editbtn,.deleteForm{
+        width: 80%;
+    }
+} */
+
+@media (max-width:768px) {
+    header{
+        width: 100%;
+    }
+    .homesection{
+         width: 90%;
+         gap:5px;
          grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    }
+    .createMain{
+        width: 90%;
+        height: 80vh;
+    }
+    .detailsection{
+        width: 90%;
+    }
+    .deleteForm,.editbtn{
+        font-size: 1rem;
     }
 }
