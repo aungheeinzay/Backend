@@ -3,12 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <title>Hello world!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&display=swap" rel="stylesheet">
   </head>
   <body>
     <h1>Blog.io</h1>
 
-    <p>{{post.title}}</p>
-    <img src="http://localhost:3000/{{post.image_url}}" height="400px" alt="photo">
-    <p>{{post.description}}</p>
+    <p style="font-size: xx-large;">{{post.title}}</p>
+    <img src="http://localhost:3000/{{post.image_url}}" width="100%" alt="photo">
+    <p style="font-size: larger; font-family:sans-serif;">{{post.description}}</p>
   </body>
 </html>

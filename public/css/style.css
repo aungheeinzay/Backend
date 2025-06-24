@@ -305,6 +305,24 @@ h3{
         width: 80%;
     }
 } */
+.paginations {
+    width: 80%;
+    margin-inline: auto;
+    padding-block: 20px;
+}
+.paginations a{
+    
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background: darkred;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.nextPagination{
+    float: right;
+}
+
 
 @media (max-width:768px) {
     header{
@@ -324,5 +342,8 @@ h3{
     }
     .deleteForm,.editbtn{
         font-size: 1rem;
+    }
+    .paginations{
+        width: 90%;
     }
 }

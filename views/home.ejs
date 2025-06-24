@@ -14,5 +14,11 @@
        </div>
        <% } %>
     </section>
+   <% if(posts.length !== 0) { %>
+     <div class="paginations">
+        <a class="nextPagination"  href="/?page=<%= nextpage %>"><%= isNext ? "next" : "end" %></a>
+        <a class="previousPagination" href="/?page=<%= prepage %>"><%= isPre ? "previous" : "no pre" %></a>
+    </div>
+    <% } %>
 </body>
 </html>

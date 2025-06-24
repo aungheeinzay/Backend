@@ -6,15 +6,46 @@ const fs = require("fs")
 const path = require("path");
 const { fileDelete } = require("../utils/fileDelete");
 
+//queryPage * postperpage / totalpost
+//1         * 3 =3        /14   true
+//2         * 3 =6        /14   true
+//3         * 3 =9        /14   true
+//4         * 3 =12       /14   true  last 2
+//5         * 3 =15       /14<15 false
 
-
-exports.renderHome=async(req,res)=>{
+let postPerPage = 3;
+let page;
+exports.renderHome=(req,res,next)=>{
+page =+req.query.page || 1
+let totalPost;  
+    
 const isLogin = req.session.isLogin ? true : false
-Post.find().select("title image_url description createdAt").populate("userId","username")
-.sort({createdAt:-1}).then((posts)=>{
+Post.find().countDocuments().then((totalDocument)=>{
+totalPost = totalDocument
+return Post.find().select("title image_url description createdAt")
+.populate("userId","username")
+.skip((page-1)*postPerPage)
+.limit(postPerPage)
+.sort({createdAt:-1})
 
-    res.render("home",{posts,isLogin,csrfToken:req.csrfToken(),account:req.user?.email})
-}).catch(err=>console.log(err))
+}).then((posts)=>{
+
+       return res.render("home",{
+        posts,
+        isLogin,
+        csrfToken:req.csrfToken(),
+        account:req.user?.email,
+        isNext:(page*postPerPage<totalPost)? true : false,
+        isPre:(page!==1) ? true : false,
+        nextpage:(page*postPerPage<totalPost)? page+1 : page,
+        prepage:(page==1) ? page : page-1
+    })
+}).catch(
+    (err)=>{
+        console.log(err)
+        const error = new Error("not post found")
+        return next(error)
+    })
 }
 
 exports.renderDetail=async(req,res,next)=>{
@@ -28,7 +59,9 @@ exports.renderDetail=async(req,res,next)=>{
     //    if(!post){
     //     res.status(404).send("post is not found")
     // //    }
-        const isCurrentUser = (post.userId.toString()==req.user?._id) ? true : false
+        const isCurrentUser = (post.userId._id.toString()==req.user?._id.toString()) ? true : false
+        console.log(isCurrentUser);
+        
         res.render("details",{
             isLogin,
             post,
@@ -47,22 +80,19 @@ exports.savePostAsPDF=async(req,res)=>{
     const html = fs.readFileSync(path.join(__dirname,"../","views","template","template.html"), "utf8");//to read html template
     const downloadPath = path.join(__dirname,"../","public","pdf",new Date().getTime().toString() +Math.round(Math.random()*1E9).toString()+".pdf")
 const options = {
-    format:"A3",
+    format:"A4",
     orientiation:"portrait",
     border:"10mm",
     header:{
-        height:"45mm",
+        height:"20mm",
         contents:'<div style="text-align: center;">PDf from blog.io</div>'
     },
     footer:{
-        heigth:"28mm",
-        contents:{
-            first:'Cover page',
-            default:'<span style="color: #444;">blog.io</span>',
-            last:'last page'
+        heigth:"15mm",
+        contents:'<span style="color: #444;">blog.io</span>', 
         }
     }
-}
+
    try{
     const post =await Post.findById(postId).lean()
     

@@ -79,13 +79,13 @@ app.use("/admin",isLogin,adminRouter)
 app.use(authRouter)
 
 app.use((err,req,res,next)=>{
-    res.status(500).render("error/500",{err})
+    res.status(500).render("error/500")
 })
 app.all("/{*any}",(req,res,next)=>{
-    res.status(404).render("error/fourofour")
-    
+    res.status(404).render("error/fourofour")    
 })//need to place this app.all() at the end of all global middleware
 //if not it block all middle ware
+
 mongoose.connect(process.env.MONGODB_URL).then((_)=>{
 app.listen(3000)
 console.log("connected to mongoose")
