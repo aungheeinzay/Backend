@@ -1,0 +1,57 @@
+    <%- include("../includes/header") %>
+   <section class="profile">
+    <div class="proDetail">
+        <% if(user.profile){ %>
+        <div class="profilePhoto">
+            <img src="/<%=user.profile%>" alt="">
+        </div>
+        <% } else { %>
+        <i class="fa-solid fa-circle-user"></i>
+        <% } %>
+        <p><%= user?.username %><% if(posts[0].userId?.isPremium) { %> 
+            <i class="fa-solid fa-crown animate__animated animate__jello animate__infinite	infinite"></i>
+           <% } %></p>
+        <p><%= user.email %></p>
+        
+    </div> 
+    <div class="pfbtns">
+         <a href="/admin/profile/edit/<%= user._id %>" class="editProfile">edit info</a>
+          <% if(posts[0].userId.isPremium){ %>
+             <a href="/admin/checkPremiumStatus/<%= posts[0].userId?.
+            payment_session_key %>" >check premium status</a>
+            <%}else{%>
+           
+            <a href="/admin/premium" class="editProfile">buy premium</a>
+            <%}%>
+    </div>
+    
+   </section>
+   <div class="line">
+    <p>posts</p>
+    <hr>
+   </div>
+    <section class="homesection">
+        
+        <% if(posts.length==0) { %>
+            <p>not post yet</p>
+        <% } %>
+       <% for(p of posts) { %>
+        <div class="card">
+        <p class="card-username"><%= p.userId.username %></p>
+        <img src="/<%= p.image_url %>" alt="photo">
+        <p class="homeTitle"><%= p.title %></p>
+        <p class="homeDes"><%= p.description.substr(0,60) %><a href="/detail/<%= p._id%>"> seemore...</a></p>
+        <div class="profileHome">
+            
+        </div>
+       </div>
+       <% } %>
+    </section>
+   <% if(posts.length !== 0) { %>
+     <div class="paginations">
+        <a class="nextPagination"  href="/admin/profile/?page=<%= nextPage %>"><%= isNext ? "next" : "end" %></a>
+        <a class="previousPagination" href="/admin/profile/?page=<%= prePage %>"><%= isPre ? "previous" : "no pre" %></a>
+    </div>
+    <% } %>
+</body>
+</html>

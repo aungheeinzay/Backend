@@ -1,14 +1,31 @@
 
     <%- include("./includes/header") %>
     <section class="homesection">
-       <p class="userName"><i class="fa-duotone fa-solid fa-circle-user"></i><span ><%= account ? account : "no account"%></span></p>
+       <!-- <p class="userName"><i class="fa-duotone fa-solid fa-circle-user"></i><span ><%= account ? account : "no account"%></span></p> -->
         <% if(posts.length==0) { %>
             <p>not post yet</p>
         <% } %>
        <% for(p of posts) { %>
         <div class="card">
-        <p class="card-username"><%= p.userId.username %></p>
-        <img src="<%= p.image_url %>" alt="photo">
+        <div class="homeUserPf">
+            <a href="/profile/<%=p.userId._id%>">
+                 <% if(p.userId.profile){ %>
+        <div class="profilePhotoHome">
+            <img src="/<%=p.userId.profile%>" alt="">
+        </div>
+        <% } else { %>
+        <i class="fa-solid fa-circle-user"></i>
+        <% } %>
+            </a>
+             <a class="card-username" href="/profile/<%=p.userId._id%>">
+            <% if(p.userId?.isPremium){ %>
+            <i class="fa-solid fa-crown animate__animated animate__jello animate__infinite	infinite"></i>
+            <%}%>
+            <%= p.userId.email %></a>
+        </div>
+        <div class="imgContainer">
+            <img src="<%= p.image_url %>" alt="photo">
+        </div>
         <p class="homeTitle"><%= p.title %></p>
         <p class="homeDes"><%= p.description.substr(0,60) %><a href="/detail/<%= p._id%>"> seemore...</a></p>
        </div>

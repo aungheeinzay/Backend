@@ -118,3 +118,8 @@ exports.deletePost=(req,res)=>{
    
 
 }
+
+exports.renderProfile=(req,res)=>{
+    const isLogin = req.session.isLogin ? true : false
+    res.render("users/profile",{isLogin,csrfToken:req.csrfToken()})
+}

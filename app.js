@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const csrf = require("csurf")
+
 const path =require("path")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
@@ -66,7 +67,7 @@ app.use((req,res,next)=>{
     }
 
     
-    User.findById(req.session.userInfo._id).select("username email").then((user)=>{
+    User.findById(req.session.userInfo._id).select("_id username email isPremium profile").then((user)=>{
         console.log(user);
         req.user=user
         next()
@@ -78,9 +79,9 @@ app.use(postRouter)
 app.use("/admin",isLogin,adminRouter)
 app.use(authRouter)
 
-app.use((err,req,res,next)=>{
-    res.status(500).render("error/500")
-})
+// app.use((err,req,res,next)=>{
+//     res.status(500).render("error/500")
+// })
 app.all("/{*any}",(req,res,next)=>{
     res.status(404).render("error/fourofour")    
 })//need to place this app.all() at the end of all global middleware

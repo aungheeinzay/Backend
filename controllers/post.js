@@ -13,7 +13,7 @@ const { fileDelete } = require("../utils/fileDelete");
 //4         * 3 =12       /14   true  last 2
 //5         * 3 =15       /14<15 false
 
-let postPerPage = 3;
+let postPerPage = 6;
 let page;
 exports.renderHome=(req,res,next)=>{
 page =+req.query.page || 1
@@ -23,7 +23,7 @@ const isLogin = req.session.isLogin ? true : false
 Post.find().countDocuments().then((totalDocument)=>{
 totalPost = totalDocument
 return Post.find().select("title image_url description createdAt")
-.populate("userId","username")
+.populate("userId","email _id isPremium profile")
 .skip((page-1)*postPerPage)
 .limit(postPerPage)
 .sort({createdAt:-1})

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/createPost.css">
+</head>
+<body>
+    <main class="registerMain">
+        <h1>update info</h1>
+    <form action="/admin/profile/edit/<%= user._id %>" method="post" enctype="multipart/form-data">
+          <% if(errorMsg.length){%>
+            <p class="failMsg"><%=errorMsg %></p>
+        <% } %>
+         <% if(user.isPremium){%>
+        <input type="file" name = "image_url" id="file"/>
+        <label for="file"><span>+</span><span>upload photo</span></label>
+        <% } %> 
+        <input type="text" name="username" placeholder="enter a username" value="<%=failFormData.username ? failFormData.username : user.username %>" >
+        <input type="text" name="email" placeholder="enter a email" value="<%= failFormData.email ? failFormData.email : user.email  %>">
+        <input type="password" name="password" placeholder="enter password">
+        <input hidden name="_csrf" value="<%= csrfToken %>">
+        <button>update profile</button>
+    </form>
+    <a href="/">back</a>
+    </main>
+</body>
+</html>

@@ -1,0 +1,44 @@
+    <%- include("../includes/header") %>
+   <section class="profile">
+    
+    <div class="proDetail">
+      <%if(posts[0].userId.profile){%>
+       <div class="profilePhoto">
+         <img src="/<%= posts[0].userId.profile %>" alt="">
+       </div>
+        <%}else{%> 
+        <i class="fa-solid fa-circle-user"></i>
+        <%}%>
+        <p><%= posts[0]?.userId?.username || "unknown" %></p>
+        
+        <p><% if(posts[0].userId.isPremium){ %>
+            <i class="fa-solid fa-crown animate__animated animate__jello animate__infinite	infinite"></i>
+            <%}%>
+            <%= posts[0].userId.email %></p>
+    </div> 
+   </section>
+    <section class="homesection">
+        <% if(posts.length==0) { %>
+            <p>not post yet</p>
+        <% } %>
+       <% for(p of posts) { %>
+        <div class="card">
+        
+        <p class="card-username">author :<% if(p.userId.isPremium){ %>
+            <i class="fa-solid fa-crown animate__animated animate__jello animate__infinite	infinite"></i>
+            <%}%>
+            <%= p.userId.username %></p>
+        <img src="/<%= p.image_url %>" alt="photo">
+        <p class="homeTitle"><%= p.title %></p>
+        <p class="homeDes"><%= p.description.substr(0,60) %><a href="/detail/<%= p._id%>"> seemore...</a></p>
+       </div>
+       <% } %>
+    </section>
+   <% if(posts.length !== 0) { %>
+     <div class="paginations">
+        <a class="nextPagination"  href="/profile/<%=p.userId._id%>/?page=<%= nextPage %>"><%= isNext ? "next" : "end" %></a>
+        <a class="previousPagination" href="/profile/<%=p.userId._id%>/?page=<%= prePage %>"><%= isPre ? "previous" : "no pre" %></a>
+    </div>
+    <% } %>
+</body>
+</html>

@@ -1,0 +1,30 @@
+
+    <%- include("../includes/header") %>
+    
+    <section class="premuim">
+        <h1>Premium</h1>
+        <div class="box">
+            <div class="card">
+                <h3>CIF.io premium</h3>
+                <ul>
+                    <li>Can save post as pdf</li>
+                    <li>Animate profile badge</li>
+                    <li>Can set username unlimated</li>
+                </ul>
+                <button class="premiumnbtn">Buy io premium <i class="fa-solid fa-crown"></i></button>
+            </div>
+        </div>
+    </section>
+      <script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    const stripe = Stripe('pk_test_51OWwvuKpHWGUVeUqDG22QaRGFKyyaiUZCJyh10mI6syWOVhXpLmWnkBGSA9riIvim358AQTCJkBua8mNeBxg6gZy00hWzSdiYm')
+    const checkoutBtn = document.querySelector(".premiumnbtn")
+    checkoutBtn.addEventListener('click',()=>{
+        stripe.redirectToCheckout({
+            sessionId: "<%=session_id %>"
+        })
+    })
+    </script>
+</body>
+</html>

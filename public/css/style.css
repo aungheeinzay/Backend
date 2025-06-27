@@ -22,8 +22,8 @@ header{
     justify-content: space-between;
     align-items: center;
     background-color: darkred;
-    line-height: 25px;
-    padding-block: 5px;
+    line-height: 30px;
+    padding-block: 10px;
 }
 header>div>img{
     width: 30px;
@@ -31,6 +31,17 @@ header>div>img{
     padding:2px;
     border-radius: 50%;
     background-color: white;
+}
+.imgContainer{
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+.imgContainer img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .routeContainer{
     display: flex;
@@ -322,8 +333,105 @@ h3{
 .nextPagination{
     float: right;
 }
+.profile{
+    width: 80%;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-block: 10px;
+    align-items: center;
+}
+.proDetail i{
+    font-size: 4rem;
+    text-align: center;
+}
+.proDetail p{
+    padding-block: 10px;
+}
+.profile .proDetail{
+    display: grid;
+    place-items: center;
+}
+.profile h1{
+    color: darkred;
+}
+.pfbtns{
+    gap: 10px;
+}
+.editProfile{
+    padding: 5px 10px;
+    background: darkred;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display:block;
+    margin-top: 5px;
+    text-align: center;
+}
+.premuim{
+    width: 80%;
+    margin:2rem auto;
+}
+.card ul{
+    list-style: none;
+}
+.proDetail>p>i{
+    font-size: medium;
+}
+.box .card p{
+    background: darkred;
+    text-align: center;
+    margin: 10px auto;
+    width: 100%;
+    color: white;
+    padding-block: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.successPrem{
+    width: 80%;
+    margin: 10px auto;
+}
+.homeUserPf{
+    padding: 5px;
+}
 
-
+.premiumStatus{
+    width: 80%;
+    margin-inline: auto;
+    display: grid;
+    place-items: center;
+    margin-top: 5rem;
+}
+.profilePhoto{
+    width: 200px;
+    height: 200px;
+    clip-path: circle();
+    overflow: hidden;
+}
+.profilePhoto img{
+    width:100%;
+    object-fit: cover;
+}
+.profilePhotoHome{
+    width: 50px;
+    height: 50px;
+    clip-path: circle();
+    overflow: hidden;
+}
+.profilePhotoHome img{
+    width:100%;
+    object-fit: cover;
+}
+.homeUserPf .fa-circle-user{
+    font-size: 50px;
+}
+.line{
+    width: 80%;
+    margin-inline: auto;
+}
 @media (max-width:768px) {
     header{
         width: 100%;
@@ -345,5 +453,28 @@ h3{
     }
     .paginations{
         width: 90%;
+    }
+    .profile{
+        width: 90%;
+        flex-direction: column;
+        align-items: center;
+    }
+    .imgContainer{
+        height: 150px;
+    }
+    .profilePhotoHome{
+        width: 40px;
+        height: 40px;
+    }
+    .homeUserPf .fa-circle-user{
+        font-size: 40px;
+    }
+    .line{
+        width: 90%;
+    }
+    .proDetail{
+        width: fit-content;
+        margin-inline:auto ;
+        text-align: center;
     }
 }

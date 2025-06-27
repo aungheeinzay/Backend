@@ -4,8 +4,6 @@ const {Schema,model} = mongoose
 const userSchema = new Schema({
     username:{
         type:String,
-        required:true,
-        minLength:3,
         maxLength:15
     },
     email:{
@@ -17,6 +15,16 @@ const userSchema = new Schema({
         type:String,
         required:true,
         minLength:4
+    },
+    isPremium:{
+        type:Boolean,
+        default:false
+    },
+    profile:{
+        type:String,
+    },
+    payment_session_key:{
+        type:String
     },
     resetToken:String,
     tokenExpiration:Date
