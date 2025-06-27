@@ -4,8 +4,9 @@ const { isPremium } = require("../middleware/isPremium");
 const Post = require("../models/post")
 const User = require("../models/user");
 const bcrypt = require("bcrypt")
+const dotenv = require("dotenv").config()
 const {validationResult} =require("express-validator");
-const stripe = require("stripe")("sk_test_51OWwvuKpHWGUVeUqBzTwcOa0EUii8EDa48mZXnhwDZegcreYfQED0u1T8WzvXgHVfej3dnMEyvXBWtdiuWSMahdW00CP6fUUiO")
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 const postPerPage =6;
 let totalPosts;
 exports.renderProfile=(req,res)=>{
